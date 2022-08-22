@@ -1,0 +1,25 @@
+- hosts: TestLinux
+  become: yes
+  ignore_errors: true
+  gather_facts: false
+  tasks:
+  - name: Copy CS installer over
+    copy:
+      src: /tmp/Falcon
+      dest: /tmp/
+  - name: Install Crowdstrike pacakge
+    shell: yum install /tmp/Falcon/falcon-sensor-6.33.0-13003.el7.x86_64.rpm -y
+  - name: Set CID
+    shell: /opt/CrowdStrike/falconctl -s --cid=4F797CA7DAAC4655B42A7A69C6257D82-49 -f
+  - name: Start the agent
+    shell: systemctl start falcon-sensor
+  - name: set CS proxy
+    shell: /opt/CrowdStrike/falconctl -s --aph=192.168.25.42 --app=4188
+  - name: set CS proxy 2
+    shell: /opt/CrowdStrike/falconctl -g --aph --app
+  - name: set CS proxy 3
+    shell: /opt/CrowdStrike/falconctl -s --apd=FALSE
+  - name: Restart the agent
+    shell: systemctl restart falcon-sensor
+  - name: remove installer
+    shell: rm -rf /tmp/Falcon  

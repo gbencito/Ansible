@@ -1,0 +1,10 @@
+---
+ - name: checking service status
+   hosts: all
+   gather_facts: false
+   ignore_errors: true
+   tasks:
+    - name: checking service status
+      shell: systemctl status falcon-sensor.service
+      register: systemctl_status
+    

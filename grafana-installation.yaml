@@ -1,0 +1,21 @@
+- hosts: TestLinux
+  become: yes
+  ignore_errors: true
+  tasks:
+   - name: create node_exporter service account
+     shell: useradd --no-create-home --shell /bin/false node_exporter 
+   - name: Copy node explorer 
+     copy:
+      src: /tmp/node/node_exporter
+      dest: /usr/local/bin/
+   - name: Copy node explorer 
+     copy:
+      src: /tmp/node/node_exporter.service
+      dest: /lib/systemd/system/ 
+   - name: reload daemon
+     shell: systemctl daemon-reload
+#  - name: change permission to node exporter
+ #   shell: chmod 777 node_exporter-1.1.1.linux-amd64/node_exporter
+ # - name:  run the node exporter
+  #  shell: nohup ./node_exporter-1.1.1.linux-amd64/node_exporter &
+

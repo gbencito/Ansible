@@ -1,0 +1,17 @@
+---
+- host: NBU 
+   become: yes
+   ignore_erros: true
+
+  task: 
+   - name: copy installer to server
+     copy:
+       src: /tmp/
+       destination: /tmp/
+   - name: check nbu if running
+   shell: /usr/openv/netbackup/bin/bpps -x 
+   - name: install nbu
+   shell: /tmp/ /install -y
+ 
+
+

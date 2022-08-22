@@ -1,0 +1,8 @@
+- hosts: TestLinux
+  become: yes
+  ignore_errors: true
+  tasks:
+  - name: remove current CS installer in the target host 
+    shell: rm -rf /tmp/Falcon
+  - name: uninstall the cs agent
+    shell: yum remove falcon-sensor -y

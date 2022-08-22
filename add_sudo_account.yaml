@@ -1,0 +1,9 @@
+- name: "Create sudo user"
+    become: true
+      gather_facts: no
+        hosts: 
+          tasks:
+                      - name: add user to sudo group
+                              shell: passwrd
+                                    args:
+                                                    executable: /bin/bash

@@ -1,0 +1,19 @@
+- hosts: all
+  become: yes
+  gather_facts: false  
+  ignore_errors: true
+  tasks:
+  - name: Update OS 
+    shell: yum update -y
+  - name: install wget
+    shell: yum install wget -y 
+  - name: install unzip
+    shell: yum install unzip -y
+  - name: install net-tools
+    shell: yum install net-tools -y
+  - name: insall telnet
+    shell: yum install telnet-server telnet -y
+  - name: install snmp
+    shell: yum install net-snmp -
+  - name: start snmp
+    shell: service snmpd.service start
